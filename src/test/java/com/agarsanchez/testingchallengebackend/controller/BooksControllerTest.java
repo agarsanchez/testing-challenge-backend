@@ -23,7 +23,6 @@ class BooksControllerTest {
     @Mock
     public BooksRepository booksRepository;
 
-    @InjectMocks
     private BooksController booksController;
 
     @BeforeEach
