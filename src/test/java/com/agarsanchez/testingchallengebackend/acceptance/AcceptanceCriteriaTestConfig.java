@@ -1,14 +1,22 @@
 package com.agarsanchez.testingchallengebackend.acceptance;
 
-import com.agarsanchez.testingchallengebackend.TestingChallengeBackendApplication;
-import org.junit.runner.RunWith;
+import io.cucumber.java.Before;
+import io.cucumber.spring.CucumberContextConfiguration;
+import io.restassured.RestAssured;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.boot.test.web.server.LocalServerPort;
 
-@SpringBootTest(classes = TestingChallengeBackendApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@RunWith(SpringRunner.class)
-@ContextConfiguration
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@CucumberContextConfiguration
 public class AcceptanceCriteriaTestConfig {
+
+    @LocalServerPort
+    private int port;
+
+    @Before
+    public void setup() {
+        RestAssured.baseURI = "http://localhost";
+        RestAssured.port = port;
+    }
 
 }
